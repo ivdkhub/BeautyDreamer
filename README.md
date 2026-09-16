@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BeautyDreamer Web App
 
-## Getting Started
+Sito web completo per BeautyDreamer - Manicure & Nail Art Specialist di Chiara Lulli.
+Progettato e sviluppato con Next.js 15, React, Tailwind CSS e TypeScript.
 
-First, run the development server:
+## Requisiti
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Node.js (versione 18.x o superiore raccomandata)
+- npm
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Come avviare il progetto in locale
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Assicurati di essere nella cartella del progetto:
+   ```bash
+   cd "C:\Spazio di lavoro\ivdk\Siti\beautydreamer-web"
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. Installa le dipendenze (se non lo hai già fatto):
+   ```bash
+   npm install
+   ```
 
-## Learn More
+3. Avvia il server di sviluppo:
+   ```bash
+   npm run dev
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+4. Apri il browser all'indirizzo:
+   [http://localhost:3000](http://localhost:3000)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Struttura del sito
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Home (`/`)**: Presentazione, video hero, servizi in evidenza.
+- **Su di Me (`/about`)**: Storia di Chiara Lulli e filosofia del salone.
+- **Servizi (`/services`)**: Listino completo dei trattamenti.
+- **Prima e Dopo (`/portfolio`)**: Galleria interattiva con filtri.
+- **Blog (`/blog`)**: Articoli e consigli di bellezza.
+- **FAQ (`/faq`)**: Domande frequenti.
+- **Prenota Ora (`/book`)**: Modulo interattivo per la prenotazione appuntamenti.
+- **Admin Dashboard (`/admin`)**: Area riservata per la gestione.
+  - *Demo Username:* admin@beautydreamer.it
+  - *Demo Password:* AdminBeauty2026!
 
-## Deploy on Vercel
+## Note sullo Sviluppo
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Asset:** Le immagini e i video forniti sono stati organizzati nella cartella `public/assets/`.
+- **Stile:** I colori, il font Playfair Display (per titoli) e Montserrat (per i testi) sono configurati globalmente e gestiti tramite classi utility in Tailwind CSS v4 in `src/app/globals.css`.
+- **SEO & Prestazioni:** I metatag base e per Open Graph (social sharing) sono configurati nel `RootLayout`. Le immagini utilizzano il componente `<Image>` di Next.js per l'ottimizzazione e il lazy loading automatico.

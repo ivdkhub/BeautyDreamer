@@ -1,26 +1,49 @@
 @import "tailwindcss";
 
+@theme {
+  /* Palette raffinata ed esclusiva: Giallo crema chiaro e Bordeaux */
+  --color-brand-nude: #f4e47c; /* rgb(244, 228, 124) */
+  --color-brand-rose: #f4e47c; /* Force same yellow to avoid variants */
+  --color-brand-gold: #cba37b; /* Oro caldo (keep for accents if needed, or remove) */
+  --color-brand-charcoal: #5e1122; /* rgb(94, 17, 34) */
+  --color-brand-beige: #f4e47c; /* Usiamo lo stesso giallo anche qui per consistenza */
+  --color-brand-dark: #1a1a1a;
+  
+  --font-serif: var(--font-playfair);
+  --font-sans: var(--font-montserrat);
+  --font-cursive: var(--font-cursive);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: var(--color-brand-nude);
+  --foreground: var(--color-brand-charcoal);
 }
 
 body {
-  background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--background);
+  font-family: var(--font-sans), sans-serif;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif), serif;
+  font-weight: 400;
+}
+
+.hover-trigger .hover-target {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.hover-trigger:hover .hover-target {
+  opacity: 1;
+}
+
+.btn-primary {
+  @apply bg-brand-charcoal text-brand-nude px-6 py-3 rounded-md hover:bg-brand-nude hover:text-brand-charcoal border hover:border-brand-charcoal transition-all duration-300 font-semibold tracking-wide uppercase text-sm;
+}
+
+.btn-secondary {
+  @apply border border-brand-charcoal text-brand-charcoal px-6 py-3 rounded-md hover:bg-brand-charcoal hover:text-brand-nude transition-all duration-300 font-semibold tracking-wide uppercase text-sm;
 }
