@@ -66,11 +66,20 @@ export default function HeroScrolly() {
         let offsetY = 0;
 
         if (imgRatio > canvasRatio) {
-          drawWidth = canvas.height * imgRatio;
-          offsetX = (canvas.width - drawWidth) / 2;
-          // On mobile portrait, offset Y slightly to position the animated hand right in the visual focal zone
           const isMobile = window.innerWidth < 768;
-          offsetY = isMobile ? -canvas.height * 0.05 : 0;
+          if (isMobile) {
+            // Su mobile, riduciamo l'altezza del video al 70% per far sì che 
+            // la mano stia sopra la card e non ci finisca dietro (evitando l'alone scuro nel glassmorphism)
+            drawHeight = canvas.height * 0.70;
+            drawWidth = drawHeight * imgRatio;
+            offsetX = (canvas.width - drawWidth) / 2;
+            offsetY = 0;
+          } else {
+            drawHeight = canvas.height;
+            drawWidth = canvas.height * imgRatio;
+            offsetX = (canvas.width - drawWidth) / 2;
+            offsetY = 0;
+          }
         } else {
           drawHeight = canvas.width / imgRatio;
           offsetY = (canvas.height - drawHeight) / 2;
