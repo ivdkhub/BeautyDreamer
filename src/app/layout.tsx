@@ -1,24 +1,29 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Montserrat, Great_Vibes } from "next/font/google";
+import { Cormorant_Garamond, Plus_Jakarta_Sans, Alex_Brush } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { LanguageProvider } from "@/context/LanguageContext";
 
-const playfair = Playfair_Display({
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  variable: "--font-playfair",
+  variable: "--font-cormorant",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
 });
 
-const montserrat = Montserrat({
+const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  variable: "--font-montserrat",
+  variable: "--font-jakarta",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
 });
 
-const greatVibes = Great_Vibes({
+const alexBrush = Alex_Brush({
   weight: "400",
   subsets: ["latin"],
-  variable: "--font-cursive",
+  variable: "--font-alex-brush",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -49,7 +54,7 @@ export default function RootLayout({
   return (
     <html lang="it">
       <body
-        className={`${playfair.variable} ${montserrat.variable} ${greatVibes.variable} antialiased min-h-screen flex flex-col`}
+        className={`${cormorant.variable} ${jakarta.variable} ${alexBrush.variable} antialiased min-h-screen flex flex-col font-sans`}
       >
         <LanguageProvider>
           <Navbar />

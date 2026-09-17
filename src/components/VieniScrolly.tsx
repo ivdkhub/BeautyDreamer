@@ -138,16 +138,20 @@ export default function VieniScrolly() {
             ? "opacity-100 translate-y-0 pointer-events-auto" 
             : "opacity-0 translate-y-12 pointer-events-none"
         }`}>
-          <ParallaxCard maxTiltDeg={6} maxTranslatePx={6} className="text-center flex flex-col items-center bg-brand-nude/85 backdrop-blur-md p-5 sm:p-8 md:p-12 rounded-2xl sm:rounded-3xl border border-brand-charcoal/15 shadow-2xl">
-            <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-serif text-brand-charcoal mb-3 sm:mb-6 tracking-wide drop-shadow-sm">
-              {t("vieni.title")} <span className="italic font-light text-brand-charcoal/90">{t("vieni.titleAccent")}</span>
-            </h2>
-            <p className="text-xs sm:text-base md:text-xl text-brand-charcoal/90 mb-5 sm:mb-8 max-w-2xl font-medium drop-shadow-sm leading-relaxed">
-              {t("vieni.desc")}
-            </p>
-            <Link href="/book" className="btn-primary shadow-lg hover:shadow-xl transition-all py-2.5 px-5 sm:py-3.5 sm:px-8 text-xs sm:text-sm rounded-xl">
-              {t("vieni.cta")}
-            </Link>
+          <ParallaxCard maxTiltDeg={6} maxTranslatePx={6} className="w-full">
+            <div className="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-12 transition-all">
+              <div className="relative z-10 text-center flex flex-col items-center">
+                <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-serif text-brand-charcoal mb-3 sm:mb-6 tracking-wide drop-shadow-sm">
+                  {t("vieni.title")} <span className="font-cursive italic font-normal text-3xl sm:text-5xl md:text-6xl lg:text-7xl text-brand-charcoal/90 ml-2">{t("vieni.titleAccent")}</span>
+                </h2>
+                <p className="text-xs sm:text-base md:text-xl text-brand-charcoal/90 mb-5 sm:mb-8 max-w-2xl font-medium drop-shadow-sm leading-relaxed">
+                  {t("vieni.desc")}
+                </p>
+                <Link href="/book" className="btn-primary shadow-lg hover:shadow-xl transition-all py-2.5 px-5 sm:py-3.5 sm:px-8 text-xs sm:text-sm rounded-xl">
+                  {t("vieni.cta")}
+                </Link>
+              </div>
+            </div>
           </ParallaxCard>
         </div>
       </div>

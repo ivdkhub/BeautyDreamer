@@ -84,12 +84,12 @@ export default function Home() {
         
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           {servicesData.map((srv, idx) => (
-            <ParallaxCard key={idx} delay={idx * 0.1} maxTiltDeg={8} maxTranslatePx={8} className="h-full">
-              <div className="group cursor-pointer bg-brand-nude/70 backdrop-blur-xs rounded-2xl sm:rounded-3xl border-2 border-brand-charcoal/15 hover:border-brand-charcoal/40 transition-all shadow-sm hover:shadow-xl h-full flex flex-col justify-between overflow-hidden relative min-h-[380px] sm:min-h-[440px]">
+            <ParallaxCard key={idx} delay={idx * 0.1} maxTiltDeg={12} maxTranslatePx={12} className="h-full">
+              <div className="group cursor-pointer bg-gradient-to-br from-white/50 to-white/20 backdrop-blur-md rounded-2xl sm:rounded-[2rem] transition-all duration-500 shadow-[0_15px_35px_rgba(0,0,0,0.07),inset_0_2px_4px_rgba(255,255,255,0.8)] hover:shadow-[0_25px_50px_rgba(0,0,0,0.15),inset_0_2px_8px_rgba(255,255,255,1)] hover:-translate-y-3 h-full flex flex-col justify-between overflow-hidden relative min-h-[380px] sm:min-h-[440px]">
                 
                 {srv.textTop ? (
                   <>
-                    <div className="p-5 sm:p-7 pb-0 relative z-10">
+                    <div className="p-6 sm:p-8 pb-0 relative z-10 drop-shadow-sm">
                       <h4 className="text-xl sm:text-2xl font-serif font-bold text-brand-charcoal mb-1.5 sm:mb-2">{srv.title}</h4>
                       <p className="text-brand-charcoal/80 text-xs sm:text-sm leading-relaxed">{srv.desc}</p>
                     </div>
@@ -98,7 +98,7 @@ export default function Home() {
                         src={`/assets/images/${srv.img}`}
                         alt={srv.title}
                         fill
-                        className="object-contain object-right-bottom scale-115 sm:scale-125 translate-x-2 sm:translate-x-3 translate-y-2 sm:translate-y-3 group-hover:scale-130 transition-transform duration-700 mix-blend-multiply pointer-events-none"
+                        className="object-contain object-right-bottom scale-115 sm:scale-125 translate-x-2 sm:translate-x-3 translate-y-2 sm:translate-y-3 group-hover:scale-[1.35] transition-transform duration-700 mix-blend-multiply pointer-events-none drop-shadow-2xl"
                       />
                     </div>
                   </>
@@ -109,10 +109,10 @@ export default function Home() {
                         src={`/assets/images/${srv.img}`}
                         alt={srv.title}
                         fill
-                        className="object-contain object-right-top scale-115 sm:scale-125 translate-x-2 sm:translate-x-3 -translate-y-2 group-hover:scale-130 transition-transform duration-700 mix-blend-multiply pointer-events-none"
+                        className="object-contain object-right-top scale-115 sm:scale-125 translate-x-2 sm:translate-x-3 -translate-y-2 group-hover:scale-[1.35] transition-transform duration-700 mix-blend-multiply pointer-events-none drop-shadow-2xl"
                       />
                     </div>
-                    <div className="p-5 sm:p-7 pt-2 relative z-10 mt-auto">
+                    <div className="p-6 sm:p-8 pt-2 relative z-10 mt-auto drop-shadow-sm">
                       <h4 className="text-xl sm:text-2xl font-serif font-bold text-brand-charcoal mb-1.5 sm:mb-2">{srv.title}</h4>
                       <p className="text-brand-charcoal/80 text-xs sm:text-sm leading-relaxed">{srv.desc}</p>
                     </div>

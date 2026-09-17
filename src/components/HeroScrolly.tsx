@@ -150,7 +150,7 @@ export default function HeroScrolly() {
         <div className="absolute inset-x-0 bottom-0 h-28 sm:h-36 bg-gradient-to-t from-brand-nude via-brand-nude/70 to-transparent z-10 pointer-events-none"></div>
 
         {/* Brand Header: On mobile, 'Chiara Lulli' at top + logo; On PC, in sovraimpressione over frames */}
-        <div className="absolute top-3 sm:top-5 md:top-28 lg:top-36 w-full flex flex-col items-center justify-center z-20 pointer-events-none px-4 sm:px-6">
+        <div className="absolute top-[20vh] sm:top-[22vh] md:top-[35vh] lg:top-[38vh] w-full flex flex-col items-center justify-center z-20 pointer-events-none px-4 sm:px-6">
           {/* Mobile Signature at Top */}
           <div className="block md:hidden w-full max-w-[190px] sm:max-w-[240px] flex justify-center mb-3 sm:mb-5">
             <Image 
@@ -185,39 +185,41 @@ export default function HeroScrolly() {
         {/* Mobile-Optimized Glassmorphic Hero Card with Parallax Tilt Effect (Raised on PC) */}
         <div className="absolute bottom-3 sm:bottom-6 md:bottom-16 lg:bottom-20 inset-x-3 sm:inset-x-6 md:left-10 lg:left-16 md:right-auto md:max-w-xl z-30 pointer-events-auto">
           <ParallaxCard maxTiltDeg={7} maxTranslatePx={7} className="w-full">
-            <div className="bg-brand-nude/85 backdrop-blur-md border border-brand-charcoal/15 rounded-2xl sm:rounded-3xl p-4 sm:p-5 md:p-7 shadow-[0_10px_35px_-8px_rgba(94,17,34,0.18)] transition-all">
-              
-              {/* Title with High-Contrast Typography */}
-              <div className="mb-1.5 sm:mb-2.5">
-                <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-serif text-brand-charcoal leading-tight tracking-wide">
-                  {t("hero.title1")}{" "}
-                  <span className="italic block sm:inline text-brand-charcoal font-serif font-light">
-                    — {t("hero.title2")}
-                  </span>
-                </h1>
+            <div className="glass-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 md:p-7 transition-all">
+              <div className="relative z-10">
+                
+                {/* Title with High-Contrast Typography */}
+                <div className="mb-1.5 sm:mb-2.5">
+                  <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-serif text-brand-charcoal leading-tight tracking-wide">
+                    {t("hero.title1")}{" "}
+                    <span className="font-cursive italic block sm:inline text-brand-charcoal font-normal text-2xl sm:text-3xl md:text-4xl ml-1">
+                      — {t("hero.title2")}
+                    </span>
+                  </h1>
+                </div>
+
+                {/* Description */}
+                <p className="text-xs sm:text-sm text-brand-charcoal/85 mb-3.5 sm:mb-4 leading-relaxed font-medium">
+                  {t("hero.desc")}
+                </p>
+
+                {/* CTA Buttons: 2-column mobile grid / flex on desktop for ergonomic one-thumb access */}
+                <div className="grid grid-cols-2 sm:flex sm:flex-row gap-2 sm:gap-3.5 items-center w-full sm:w-auto">
+                  <Link 
+                    href="/book" 
+                    className="btn-primary text-center py-2.5 px-3 sm:py-3 sm:px-6 text-xs sm:text-sm font-semibold tracking-wider uppercase shadow-md hover:shadow-lg transition-all flex items-center justify-center rounded-xl"
+                  >
+                    {t("hero.bookBtn")}
+                  </Link>
+                  <Link 
+                    href="/services" 
+                    className="btn-secondary text-center py-2.5 px-3 sm:py-3 sm:px-6 text-xs sm:text-sm font-semibold tracking-wider uppercase bg-white/20 backdrop-blur-md border-brand-charcoal/40 hover:bg-brand-charcoal hover:text-brand-nude shadow-sm hover:shadow-md transition-all flex items-center justify-center rounded-xl"
+                  >
+                    {t("hero.servicesBtn")}
+                  </Link>
+                </div>
+
               </div>
-
-              {/* Description */}
-              <p className="text-xs sm:text-sm text-brand-charcoal/85 mb-3.5 sm:mb-4 leading-relaxed font-medium">
-                {t("hero.desc")}
-              </p>
-
-              {/* CTA Buttons: 2-column mobile grid / flex on desktop for ergonomic one-thumb access */}
-              <div className="grid grid-cols-2 sm:flex sm:flex-row gap-2 sm:gap-3.5 items-center w-full sm:w-auto">
-                <Link 
-                  href="/book" 
-                  className="btn-primary text-center py-2.5 px-3 sm:py-3 sm:px-6 text-xs sm:text-sm font-semibold tracking-wider uppercase shadow-md hover:shadow-lg transition-all flex items-center justify-center rounded-xl"
-                >
-                  {t("hero.bookBtn")}
-                </Link>
-                <Link 
-                  href="/services" 
-                  className="btn-secondary text-center py-2.5 px-3 sm:py-3 sm:px-6 text-xs sm:text-sm font-semibold tracking-wider uppercase bg-brand-nude/60 backdrop-blur-sm border-brand-charcoal/30 hover:border-brand-charcoal shadow-sm hover:shadow-md transition-all flex items-center justify-center rounded-xl"
-                >
-                  {t("hero.servicesBtn")}
-                </Link>
-              </div>
-
             </div>
           </ParallaxCard>
         </div>

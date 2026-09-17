@@ -64,11 +64,18 @@ export default function ParallaxCard({
     const tx = ((x - cx) / cx) * maxTranslatePx;
     const ty = ((y - cy) / cy) * maxTranslatePx;
 
+    domRef.current.style.setProperty('--mouse-x', `${x}px`);
+    domRef.current.style.setProperty('--mouse-y', `${y}px`);
+    domRef.current.style.setProperty('--mouse-opacity', '1');
+
     setTilt({ rx, ry, tx, ty });
     setIsHovered(true);
   };
 
   const handleMouseLeave = () => {
+    if (domRef.current) {
+      domRef.current.style.setProperty('--mouse-opacity', '0');
+    }
     setTilt({ rx: 0, ry: 0, tx: 0, ty: 0 });
     setIsHovered(false);
   };

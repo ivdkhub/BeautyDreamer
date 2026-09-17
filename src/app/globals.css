@@ -9,26 +9,53 @@
   --color-brand-beige: #f4e47c; /* Usiamo lo stesso giallo anche qui per consistenza */
   --color-brand-dark: #1a1a1a;
   
-  --font-serif: var(--font-playfair);
-  --font-sans: var(--font-montserrat);
-  --font-cursive: var(--font-cursive);
+  --font-serif: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
+  --font-sans: var(--font-jakarta), 'Plus Jakarta Sans', sans-serif;
+  --font-cursive: var(--font-alex-brush), 'Alex Brush', cursive;
+  --font-accent: var(--font-alex-brush), 'Alex Brush', cursive;
 }
 
 :root {
   --background: var(--color-brand-nude);
   --foreground: var(--color-brand-charcoal);
+  --font-serif: var(--font-cormorant);
+  --font-sans: var(--font-jakarta);
+  --font-cursive: var(--font-alex-brush);
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: var(--font-sans), sans-serif;
+  font-family: var(--font-sans), 'Plus Jakarta Sans', sans-serif;
+  font-weight: 400;
+  font-size: 14px; /* Come richiesto: 14-15px */
   overflow-x: hidden;
 }
 
+@media (min-width: 768px) {
+  body {
+    font-size: 15px; /* Per schermi più grandi */
+  }
+}
+
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-serif), serif;
+  font-family: var(--font-serif), 'Cormorant Garamond', serif;
+  font-weight: 600; /* Richiesto Semi-Bold/Medium */
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+
+p {
+  font-family: var(--font-sans), 'Plus Jakarta Sans', sans-serif;
   font-weight: 400;
+  line-height: 1.6;
+}
+
+.font-accent,
+.font-cursive {
+  font-family: var(--font-cursive), 'Alex Brush', cursive !important;
 }
 
 .hover-trigger .hover-target {
@@ -41,9 +68,70 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-primary {
-  @apply bg-brand-charcoal text-brand-nude px-6 py-3 rounded-md hover:bg-brand-nude hover:text-brand-charcoal border hover:border-brand-charcoal transition-all duration-300 font-semibold tracking-wide uppercase text-sm;
+  @apply bg-brand-charcoal text-brand-nude px-6 py-3 rounded-md hover:bg-brand-nude hover:text-brand-charcoal border hover:border-brand-charcoal transition-all duration-300 font-sans font-semibold tracking-wide uppercase text-sm;
 }
 
 .btn-secondary {
-  @apply border border-brand-charcoal text-brand-charcoal px-6 py-3 rounded-md hover:bg-brand-charcoal hover:text-brand-nude transition-all duration-300 font-semibold tracking-wide uppercase text-sm;
+  @apply border border-brand-charcoal text-brand-charcoal px-6 py-3 rounded-md hover:bg-brand-charcoal hover:text-brand-nude transition-all duration-300 font-sans font-semibold tracking-wide uppercase text-sm;
+}
+
+/* =========================================================================
+   FROSTED GLASSMORPHISM WITH GRAIN / NOISE & DYNAMIC CURSOR SPOTLIGHT
+   ========================================================================= */
+.glass-card {
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0.12) 100%
+  );
+  backdrop-filter: blur(36px) saturate(190%);
+  -webkit-backdrop-filter: blur(36px) saturate(190%);
+  border: 1px solid rgba(94, 17, 34, 0.14);
+  box-shadow: 
+    0 20px 45px -12px rgba(94, 17, 34, 0.18),
+    0 4px 12px -2px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.glass-card:hover {
+  border-color: rgba(94, 17, 34, 0.28);
+  box-shadow: 
+    0 28px 55px -12px rgba(94, 17, 34, 0.24),
+    0 6px 16px -2px rgba(0, 0, 0, 0.08);
+}
+
+/* Noise / Grain texture layer (Figma overlay spec) */
+.glass-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 160px 160px;
+  opacity: 0.28;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 1;
+}
+
+/* Dynamic Interactive Spotlight following the mouse cursor across the frosted glass */
+.glass-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: var(--mouse-opacity, 0);
+  transition: opacity 0.35s ease-out;
+  background: radial-gradient(
+    260px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(255, 255, 255, 0.55) 0%,
+    rgba(255, 255, 255, 0.20) 35%,
+    rgba(255, 255, 255, 0) 75%
+  );
+  z-index: 2;
 }

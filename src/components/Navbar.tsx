@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
-import { Menu, X, Settings, Check, Globe } from "lucide-react";
+import { Menu, X, Settings, Check, Globe, MapPin, Phone, Clock } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useLanguage, Language } from "@/context/LanguageContext";
 
@@ -19,12 +19,48 @@ export default function Navbar() {
     { name: t("nav.portfolio"), href: "/portfolio" },
     { name: t("nav.blog"), href: "/blog" },
     { name: t("nav.faq"), href: "/faq" },
+    { name: t("nav.giftCard"), href: "/giftcard" },
   ];
 
-  const languages: { code: Language; label: string; flag: string }[] = [
-    { code: "it", label: "Italiano", flag: "🇮🇹" },
-    { code: "en", label: "English", flag: "🇬🇧" },
-    { code: "es", label: "Español", flag: "🇪🇸" },
+  const languages: { code: Language; label: string; flag: React.ReactNode }[] = [
+    { 
+      code: "it", 
+      label: "Italiano", 
+      flag: (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" className="w-5 h-5 sm:w-6 sm:h-6 rounded-sm object-cover drop-shadow-sm">
+          <rect width="1" height="2" fill="#009246"/>
+          <rect width="1" height="2" x="1" fill="#ffffff"/>
+          <rect width="1" height="2" x="2" fill="#ce2b37"/>
+        </svg>
+      ) 
+    },
+    { 
+      code: "en", 
+      label: "English", 
+      flag: (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" className="w-5 h-5 sm:w-6 sm:h-6 rounded-sm object-cover drop-shadow-sm">
+          <clipPath id="s"><path d="M0,0 v30 h60 v-30 z"/></clipPath>
+          <clipPath id="t"><path d="M30,15 h30 v15 z v-15 h-30 z h-30 v-15 z v15 h30 z"/></clipPath>
+          <g clipPath="url(#s)">
+            <path d="M0,0 v30 h60 v-30 z" fill="#012169"/>
+            <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" strokeWidth="6"/>
+            <path d="M0,0 L60,30 M60,0 L0,30" clipPath="url(#t)" stroke="#C8102E" strokeWidth="4"/>
+            <path d="M30,0 v30 M0,15 h60" stroke="#fff" strokeWidth="10"/>
+            <path d="M30,0 v30 M0,15 h60" stroke="#C8102E" strokeWidth="6"/>
+          </g>
+        </svg>
+      ) 
+    },
+    { 
+      code: "es", 
+      label: "Español", 
+      flag: (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" className="w-5 h-5 sm:w-6 sm:h-6 rounded-sm object-cover drop-shadow-sm">
+          <rect width="3" height="2" fill="#c60b1e"/>
+          <rect width="3" height="1" y="0.5" fill="#ffc400"/>
+        </svg>
+      ) 
+    },
   ];
 
   // Close language popup when clicking outside
@@ -42,8 +78,12 @@ export default function Navbar() {
     };
   }, [langModalOpen]);
 
+  // Determine navbar background color based on route
+  const isGiftCard = pathname === "/giftcard";
+  const navBgColor = isGiftCard ? "#d5d4ca" : "rgb(243, 226, 119)";
+
   return (
-    <nav className="sticky top-0 z-50 w-full backdrop-blur-md border-b border-brand-charcoal/10" style={{ backgroundColor: 'rgb(243, 226, 119)' }}>
+    <nav className="sticky top-0 z-50 w-full backdrop-blur-md border-b border-brand-charcoal/10 transition-colors duration-500" style={{ backgroundColor: navBgColor }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 sm:h-20 w-full">
           
@@ -69,7 +109,7 @@ export default function Navbar() {
                 <Link 
                   key={link.name} 
                   href={link.href} 
-                  className={`relative text-brand-charcoal hover:text-brand-charcoal transition-all duration-300 transform hover:scale-110 cursor-pointer text-xl font-serif tracking-wide group py-2 ${isActive ? 'font-bold scale-105' : ''}`}
+                  className={`relative text-brand-charcoal hover:text-brand-charcoal transition-all duration-300 transform hover:scale-105 cursor-pointer text-sm md:text-base font-sans font-medium tracking-wide uppercase group py-2 ${isActive ? 'font-semibold' : ''}`}
                 >
                   {link.name}
                   {/* Hover Bar / Active Bar */}
@@ -79,18 +119,20 @@ export default function Navbar() {
             })}
           </div>
 
-          {/* Right Section: Animated Gear Button + Book Now Button */}
+          {/* Right Section: Language Flag + Book Now Button */}
           <div className="flex flex-1 justify-end items-center space-x-2 sm:space-x-3">
             
-            {/* Animated Settings/Gear Button for Language Selection (Rectangular) */}
+            {/* Language Selection Dropdown */}
             <div className="relative" ref={langDropdownRef}>
               <button
                 onClick={() => setLangModalOpen(!langModalOpen)}
-                className="h-9 px-2.5 sm:h-11 sm:px-3.5 rounded-xl bg-brand-charcoal text-brand-nude flex items-center justify-center shadow-sm sm:shadow-md hover:shadow-lg transition-all transform hover:scale-105 active:scale-95 group border border-brand-charcoal/20"
+                className="bg-transparent text-brand-charcoal py-2 px-2 sm:py-3 sm:px-3 hover:text-brand-charcoal/70 transition-all rounded-xl flex items-center justify-center transform hover:scale-105 active:scale-95"
                 title={t("nav.selectLang")}
                 aria-label={t("nav.selectLang")}
               >
-                <Settings className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-700 ease-in-out group-hover:rotate-180 animate-[spin_12s_linear_infinite]" />
+                <span className="text-xl sm:text-2xl leading-none">
+                  {languages.find((l) => l.code === language)?.flag || "🇮🇹"}
+                </span>
               </button>
 
               {/* Language Selection Dropdown - Flags Only */}
@@ -124,7 +166,7 @@ export default function Navbar() {
             {/* Book Now Button */}
             <Link 
               href="/book" 
-              className="btn-primary py-2 px-3 sm:py-3 sm:px-6 text-xs sm:text-sm rounded-xl"
+              className="bg-transparent text-brand-charcoal font-sans font-semibold tracking-wide uppercase text-xs sm:text-sm py-2 px-3 sm:py-3 sm:px-6 rounded-xl transition-all duration-300 ease-out hover:bg-brand-charcoal hover:text-brand-nude hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:scale-95 border border-transparent hover:border-brand-charcoal"
             >
               {t("nav.bookNow")}
             </Link>
@@ -136,7 +178,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden border-b border-brand-charcoal/10 shadow-2xl absolute w-full" style={{ backgroundColor: 'rgb(243, 226, 119)' }}>
+        <div className="md:hidden border-b border-brand-charcoal/10 shadow-2xl absolute w-full transition-colors duration-500" style={{ backgroundColor: navBgColor }}>
           <div className="px-4 pt-4 pb-6 space-y-2 text-center">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
@@ -145,7 +187,7 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className={`block px-3 py-3 font-serif text-xl tracking-wide transition-colors ${isActive ? 'text-brand-charcoal font-bold bg-brand-charcoal/10 rounded-lg' : 'text-brand-charcoal hover:opacity-80'}`}
+                  className={`block px-3 py-3 font-sans font-medium text-base tracking-wide uppercase transition-colors ${isActive ? 'text-brand-charcoal font-semibold bg-brand-charcoal/10 rounded-lg' : 'text-brand-charcoal hover:opacity-80'}`}
                 >
                   {link.name}
                 </Link>
@@ -180,11 +222,43 @@ export default function Navbar() {
               <Link
                 href="/book"
                 onClick={() => setIsOpen(false)}
-                className="inline-block w-full btn-primary"
+                className="inline-block w-full bg-transparent text-brand-charcoal font-sans font-semibold tracking-wide uppercase py-3 rounded-xl text-center transition-all duration-300 ease-out hover:bg-brand-charcoal hover:text-brand-nude hover:shadow-lg active:scale-95 border border-transparent hover:border-brand-charcoal"
               >
                 {t("nav.bookNow")}
               </Link>
             </div>
+
+            {/* Mobile Contact & Hours Info */}
+            <div className="pt-8 pb-4 mt-4 border-t border-brand-charcoal/15 flex flex-col items-center space-y-6">
+              
+              <div className="flex flex-col items-center">
+                <div className="flex items-center gap-2 text-brand-charcoal mb-2">
+                  <MapPin size={18} />
+                  <span className="font-semibold tracking-wide uppercase text-xs">Dove siamo</span>
+                </div>
+                <p className="text-sm text-brand-charcoal/80 font-medium">Via dell'Estetica 12, Milano</p>
+              </div>
+
+              <div className="flex flex-col items-center">
+                <div className="flex items-center gap-2 text-brand-charcoal mb-2">
+                  <Phone size={18} />
+                  <span className="font-semibold tracking-wide uppercase text-xs">Contatti</span>
+                </div>
+                <a href="tel:+391234567890" className="text-sm text-brand-charcoal/80 font-medium hover:text-brand-charcoal transition-colors mb-1">+39 123 456 7890</a>
+                <a href="mailto:info@beautydreamer.it" className="text-sm text-brand-charcoal/80 font-medium hover:text-brand-charcoal transition-colors">info@beautydreamer.it</a>
+              </div>
+
+              <div className="flex flex-col items-center">
+                <div className="flex items-center gap-2 text-brand-charcoal mb-2">
+                  <Clock size={18} />
+                  <span className="font-semibold tracking-wide uppercase text-xs">Orari di Apertura</span>
+                </div>
+                <p className="text-sm text-brand-charcoal/80 font-medium mb-1">Lun - Ven: 09:00 - 19:00</p>
+                <p className="text-sm text-brand-charcoal/80 font-medium">Sab: 09:00 - 14:00 (Dom: Chiuso)</p>
+              </div>
+
+            </div>
+
           </div>
         </div>
       )}

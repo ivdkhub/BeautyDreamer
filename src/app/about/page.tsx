@@ -12,12 +12,9 @@ export default function AboutPage() {
   return (
     <div className="pt-20 bg-brand-charcoal min-h-screen">
       {/* Elegante Header della Pagina - Giallo */}
-      <div className="bg-brand-nude py-16 md:py-20 px-4 text-center relative overflow-hidden">
+      <div className="bg-brand-nude py-4 md:py-6 px-4 text-center relative overflow-hidden">
         <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]"></div>
         <div className="relative z-10 max-w-2xl mx-auto flex flex-col items-center">
-          <h1 className="text-xs sm:text-sm font-bold tracking-widest uppercase text-brand-charcoal/70 mb-3">
-            {t("about.badge")}
-          </h1>
           <div className="relative flex justify-center w-full">
             <Image 
               src="/assets/images/chiaralulli.png" 

@@ -74,110 +74,109 @@ function PortfolioCard({ item, delay }: { item: PortfolioItem; delay: number }) 
   const activeMedia = item.slides[currentSlide];
 
   return (
-    <ParallaxCard delay={delay} maxTiltDeg={5} maxTranslatePx={5} className="h-full">
+    <ParallaxCard delay={delay} maxTiltDeg={4} maxTranslatePx={6} className="h-full">
       <div 
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
-        className="group relative h-[440px] rounded-3xl overflow-hidden shadow-lg border-2 border-brand-charcoal/20 bg-brand-charcoal select-none transition-all duration-500 hover:shadow-2xl hover:border-brand-charcoal/50"
+        className="group relative h-full rounded-[2.5rem] p-4 sm:p-5 bg-gradient-to-br from-white/50 to-white/20 backdrop-blur-md shadow-[0_15px_35px_rgba(0,0,0,0.07),inset_0_2px_4px_rgba(255,255,255,0.8)] hover:shadow-[0_25px_50px_rgba(0,0,0,0.15),inset_0_2px_8px_rgba(255,255,255,1)] hover:-translate-y-2 transition-all duration-500 flex flex-col select-none"
       >
-        {/* Background Media */}
-        <div className="absolute inset-0 w-full h-full">
-          {activeMedia.type === "video" ? (
-            <video 
-              key={activeMedia.src}
-              autoPlay 
-              loop 
-              muted 
-              playsInline 
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-            >
-              <source src={activeMedia.src} type="video/mp4" />
-            </video>
-          ) : (
-            <Image 
-              src={activeMedia.src} 
-              alt={activeMedia.title}
-              fill
-              className="object-cover group-hover:scale-105 transition-transform duration-700"
-            />
-          )}
-        </div>
-
-        {/* Top Category Badge & Slide Counter */}
-        <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-20 pointer-events-none">
-          <span className="inline-flex items-center gap-1.5 bg-brand-charcoal/80 backdrop-blur-md text-[#f4e47c] text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full border border-white/10 shadow-md">
-            <Sparkles className="w-3.5 h-3.5" />
-            {item.categoryLabel}
-          </span>
-
-          {totalSlides > 1 && (
-            <span className="bg-black/60 backdrop-blur-md text-white/90 text-xs font-semibold px-3 py-1 rounded-full border border-white/10 shadow-sm">
-              {currentSlide + 1} / {totalSlides}
-            </span>
-          )}
-        </div>
-
-        {/* Navigation Arrows for Scrolling Videos (Desktop & Mobile) */}
-        {totalSlides > 1 && (
-          <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-3 z-20 pointer-events-none">
-            <button
-              onClick={prevSlide}
-              aria-label="Video Precedente"
-              className="pointer-events-auto w-9 h-9 rounded-full bg-black/50 hover:bg-black/80 backdrop-blur-md text-white flex items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-110 shadow-lg border border-white/15"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <button
-              onClick={nextSlide}
-              aria-label="Video Successivo"
-              className="pointer-events-auto w-9 h-9 rounded-full bg-black/50 hover:bg-black/80 backdrop-blur-md text-white flex items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-110 shadow-lg border border-white/15"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
-          </div>
-        )}
-
-        {/* Slide Indicator Dots at bottom */}
-        {totalSlides > 1 && (
-          <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-1.5 z-20 pointer-events-auto">
-            {item.slides.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={(e) => goToSlide(idx, e)}
-                aria-label={`Vai al video ${idx + 1}`}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  currentSlide === idx 
-                    ? "w-6 bg-[#f4e47c] shadow-sm" 
-                    : "w-2 bg-white/50 hover:bg-white/80"
-                }`}
+        {/* Top Media Container */}
+        <div className="relative w-full h-[280px] sm:h-[320px] rounded-[1.8rem] overflow-hidden bg-brand-charcoal/5 shadow-inner">
+          {/* Background Media */}
+          <div className="absolute inset-0 w-full h-full">
+            {activeMedia.type === "video" ? (
+              <video 
+                key={activeMedia.src}
+                autoPlay 
+                loop 
+                muted 
+                playsInline 
+                className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700"
+              >
+                <source src={activeMedia.src} type="video/mp4" />
+              </video>
+            ) : (
+              <Image 
+                src={activeMedia.src} 
+                alt={activeMedia.title}
+                fill
+                className="object-cover group-hover:scale-[1.03] transition-transform duration-700"
               />
-            ))}
+            )}
           </div>
-        )}
 
-        {/* Hover Overlay with 'Prenota questo risultato' */}
-        <Link 
-          href={`/book?service=${encodeURIComponent(item.serviceToBook)}`}
-          className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30 flex flex-col justify-end p-6 text-left cursor-pointer"
-        >
-          <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 space-y-2 mb-6">
-            <h3 className="text-xl md:text-2xl font-serif font-bold text-white leading-snug">
+          {/* Top Category Badge & Slide Counter */}
+          <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-20 pointer-events-none">
+            <span className="inline-flex items-center gap-1.5 bg-white/70 backdrop-blur-md text-brand-charcoal text-[10px] sm:text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full border border-white/60 shadow-sm">
+              <Sparkles className="w-3 h-3" />
+              {item.categoryLabel}
+            </span>
+
+            {totalSlides > 1 && (
+              <span className="bg-brand-charcoal/70 backdrop-blur-md text-white text-[10px] sm:text-xs font-semibold px-2.5 py-1 rounded-full border border-white/10 shadow-sm">
+                {currentSlide + 1} / {totalSlides}
+              </span>
+            )}
+          </div>
+
+          {/* Navigation Arrows for Scrolling Videos (Desktop & Mobile) */}
+          {totalSlides > 1 && (
+            <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-3 z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <button
+                onClick={prevSlide}
+                aria-label="Video Precedente"
+                className="pointer-events-auto w-8 h-8 rounded-full bg-white/40 hover:bg-white/80 backdrop-blur-md text-brand-charcoal flex items-center justify-center transition-all shadow-md border border-white/60"
+              >
+                <ChevronLeft className="w-4 h-4 ml-[-2px]" />
+              </button>
+              <button
+                onClick={nextSlide}
+                aria-label="Video Successivo"
+                className="pointer-events-auto w-8 h-8 rounded-full bg-white/40 hover:bg-white/80 backdrop-blur-md text-brand-charcoal flex items-center justify-center transition-all shadow-md border border-white/60"
+              >
+                <ChevronRight className="w-4 h-4 mr-[-2px]" />
+              </button>
+            </div>
+          )}
+
+          {/* Slide Indicator Dots at bottom */}
+          {totalSlides > 1 && (
+            <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5 z-20 pointer-events-auto">
+              {item.slides.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={(e) => goToSlide(idx, e)}
+                  aria-label={`Vai al video ${idx + 1}`}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                    currentSlide === idx 
+                      ? "w-5 bg-white shadow-sm" 
+                      : "w-1.5 bg-white/50 hover:bg-white/90"
+                  }`}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Text & CTA Container */}
+        <div className="pt-6 pb-2 px-3 flex-grow flex flex-col justify-between">
+          <div className="mb-6">
+            <h3 className="text-xl md:text-2xl font-serif font-bold text-brand-charcoal leading-snug mb-2.5">
               {item.title}
             </h3>
-            <p className="text-sm text-brand-nude/90 leading-relaxed line-clamp-2">
+            <p className="text-xs sm:text-sm text-brand-charcoal/80 leading-relaxed line-clamp-2">
               {activeMedia.desc || item.subtitle}
             </p>
-            
-            {/* CTA Button */}
-            <div className="pt-2">
-              <span className="inline-flex items-center gap-2 bg-[#f4e47c] text-[#5e1122] font-bold text-sm uppercase tracking-wider px-5 py-3 rounded-xl shadow-xl hover:bg-white hover:text-brand-charcoal transition-all group-hover:scale-105">
-                <CalendarPlus className="w-4 h-4" />
-                {t("portfolio.bookResult")}
-                <ArrowRight className="w-4 h-4 ml-0.5" />
-              </span>
-            </div>
           </div>
-        </Link>
+
+          <Link 
+            href={`/book?service=${encodeURIComponent(item.serviceToBook)}`}
+            className="w-full inline-flex items-center justify-center gap-2 bg-transparent border border-brand-charcoal text-brand-charcoal hover:bg-brand-charcoal hover:text-brand-nude font-bold text-xs uppercase tracking-wider px-4 py-3 rounded-xl transition-all duration-300"
+          >
+            <CalendarPlus className="w-4 h-4" />
+            {t("portfolio.bookResult")}
+          </Link>
+        </div>
       </div>
     </ParallaxCard>
   );
@@ -379,15 +378,15 @@ export default function PortfolioPage() {
         </p>
 
         {/* Filters */}
-        <div className="flex flex-wrap justify-center gap-3 md:gap-4 mb-14">
+        <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-14">
           {categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setActiveCategoryId(cat.id)}
-              className={`px-6 py-2.5 rounded-full text-xs md:text-sm font-semibold uppercase tracking-wider transition-all duration-300 shadow-sm ${
+              className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold uppercase tracking-wider transition-all duration-300 shadow-sm ${
                 activeCategoryId === cat.id 
-                  ? "bg-brand-charcoal text-[#f4e47c] shadow-md scale-105 ring-2 ring-brand-charcoal/20" 
-                  : "bg-white/80 text-brand-charcoal hover:bg-white hover:shadow-md border border-brand-charcoal/10"
+                  ? "bg-white/60 backdrop-blur-md text-brand-charcoal border border-white/80 shadow-[0_4px_12px_rgba(0,0,0,0.05),inset_0_2px_4px_rgba(255,255,255,0.8)] scale-105" 
+                  : "bg-transparent text-brand-charcoal/60 hover:text-brand-charcoal hover:bg-white/30 border border-brand-charcoal/10"
               }`}
             >
               {cat.label}
