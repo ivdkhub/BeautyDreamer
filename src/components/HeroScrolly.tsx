@@ -194,7 +194,7 @@ export default function HeroScrolly() {
         {/* Mobile-Optimized Glassmorphic Hero Card with Parallax Tilt Effect (Raised on PC) */}
         <div className="absolute bottom-3 sm:bottom-6 md:bottom-16 lg:bottom-20 inset-x-3 sm:inset-x-6 md:left-10 lg:left-16 md:right-auto md:max-w-xl z-30 pointer-events-auto">
           <ParallaxCard maxTiltDeg={7} maxTranslatePx={7} className="w-full">
-            <div className="glass-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 md:p-7 transition-all">
+            <div className="bg-gradient-to-br from-white/50 to-white/20 backdrop-blur-md shadow-[0_15px_35px_rgba(0,0,0,0.1),inset_0_2px_4px_rgba(255,255,255,0.8)] border border-white/40 rounded-2xl sm:rounded-3xl p-4 sm:p-5 md:p-7 transition-all">
               <div className="relative z-10">
                 
                 {/* Title with High-Contrast Typography */}
